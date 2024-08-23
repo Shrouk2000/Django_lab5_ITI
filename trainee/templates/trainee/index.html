@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block title %}
+<h2>Trainees List</h2>
+{% endblock %}
+
+{% block content %}
+    
+
+<ul>
+    {% for trainee in trainees %}
+    <li>
+        <a href="{% url 'detail' trainee.id %}">{{ trainee.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'create_trainee' %}">Add New Trainee</a>
+{% endblock  %}

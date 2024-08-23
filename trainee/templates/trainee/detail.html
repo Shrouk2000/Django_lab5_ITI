@@ -1,0 +1,9 @@
+{% block content %}
+
+<h2>{{ trainee.name }}</h2>
+<p>Age: {{ trainee.age }}</p>
+<p>Progress: {{ trainee.progress }}</p>
+<a href="{% url 'update_trainee' trainee.id %}">Edit</a>
+<a href="{% url 'delete_trainee' trainee.id %}">Delete</a>
+<a href="{% url 'index' %}">Back to list</a>
+{% endblock %}
