@@ -3,5 +3,5 @@ from .models import Track
 
 class TrackForm(forms.ModelForm):
     class Meta:
-        model = Track
+        model = Track   
         exclude = []  
