@@ -1,16 +1,23 @@
-{% extends "base.html" %} {% block title %}
+{% extends "base.html" %}
+
+{% block title %}
 <h2>Trainees List</h2>
 {% endblock %}
 
 {% block content %}
-    
-
-<ul>
-    {% for trainee in trainees %}
-    <li>
-        <a href="{% url 'detail' trainee.id %}">{{ trainee.name }}</a>
-    </li>
-    {% endfor %}
-</ul>
-<a href="{% url 'create_trainee' %}">Add New Trainee</a>
-{% endblock  %}
+<div class="container">
+    <h1>Trainees</h1>
+    <ul class="list-group">
+        {% for trainee in trainees %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{% url 'detail' trainee.id %}">{{ trainee.name }}</a>
+            <div>
+                <a href="{% url 'update_trainee' trainee.id %}" class="btn btn-primary btn-sm">Edit</a>
+                <a href="{% url 'delete_trainee' trainee.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create_trainee' %}" class="btn btn-success mt-3">Add New Trainee</a>
+</div>
+{% endblock %}
