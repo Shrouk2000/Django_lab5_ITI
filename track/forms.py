@@ -4,4 +4,4 @@ from .models import Track
 class TrackForm(forms.ModelForm):
     class Meta:
         model = Track
-        fields = ['title', 'description', 'date']
+        exclude = []  

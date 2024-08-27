@@ -1,8 +1,10 @@
-{% extends "base.html" %} {% block title %}
+{% extends "base.html" %}
 
-<h2>Are you sure you want to delete {{ track.title }}?</h2>
-{% endblock %} {% block content %}
+{% block title %}
+<h2>Are you sure you want to delete {{ trainee.name }}?</h2>
+{% endblock %}
 
+{% block content %}
 <form method="post">
     {% csrf_token %}
     <button type="submit">Confirm</button>

@@ -2,7 +2,8 @@ from django.db import models
 
 class Trainee(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField()
+    age = models.PositiveIntegerField()  
+    progress = models.TextField()  
 
     def __str__(self):
         return self.name

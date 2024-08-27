@@ -10,7 +10,7 @@ def create_trainee(request):
     if request.method == 'POST':
         form = TraineeForm(request.POST)
         if form.is_valid():
-            form.save() 
+            form.save()  # Save the new trainee
             return redirect('index')
     else:
         form = TraineeForm()
@@ -19,7 +19,7 @@ def create_trainee(request):
 def detail(request, id):
     trainee = Trainee.get_trainee_by_id(id)
     if trainee is None:
-        return redirect('index')  
+        return redirect('index')
     return render(request, 'trainee/detail.html', {'trainee': trainee})
 
 def update_trainee(request, id):
@@ -27,8 +27,7 @@ def update_trainee(request, id):
     if request.method == 'POST':
         form = TraineeForm(request.POST, instance=trainee)
         if form.is_valid():
-            # Use the model method to update the trainee
-            trainee.update_trainee(**form.cleaned_data)
+            form.save()  # Update the trainee
             return redirect('detail', id=id)
     else:
         form = TraineeForm(instance=trainee)
@@ -37,6 +36,6 @@ def update_trainee(request, id):
 def delete_trainee(request, id):
     trainee = get_object_or_404(Trainee, id=id)
     if request.method == 'POST':
-        trainee.delete_trainee()  # Using the model method
+        trainee.delete_trainee()  # Using the model method to delete
         return redirect('index')
     return render(request, 'trainee/delete_trainee.html', {'trainee': trainee})

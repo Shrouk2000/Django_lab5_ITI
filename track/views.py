@@ -19,7 +19,7 @@ def create_track(request):
 def detail(request, id):
     track = Track.get_track_by_id(id)
     if track is None:
-        return redirect('index') 
+        return redirect('index')
     return render(request, 'track/detail.html', {'track': track})
 
 def update_track(request, id):
