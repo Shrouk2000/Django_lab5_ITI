@@ -1,9 +1,16 @@
-{% block content %}
+{% extends "base.html" %}
 
+{% block title %}
 <h2>{{ trainee.name }}</h2>
+{% endblock %}
+
+{% block content %}
 <p>Age: {{ trainee.age }}</p>
 <p>Progress: {{ trainee.progress }}</p>
 <a href="{% url 'update_trainee' trainee.id %}">Edit</a>
-<a href="{% url 'delete_trainee' trainee.id %}">Delete</a>
+<form method="post" action="{% url 'delete_trainee' trainee.id %}" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
 <a href="{% url 'index' %}">Back to list</a>
 {% endblock %}

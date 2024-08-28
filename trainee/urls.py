@@ -1,10 +1,8 @@
-from django.urls import path
-from . import views
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('create/', views.create_trainee, name='create_trainee'),
-    path('<int:id>/', views.detail, name='detail'),
-    path('<int:id>/update/', views.update_trainee, name='update_trainee'),
-    path('<int:id>/delete/', views.delete_trainee, name='delete_trainee'),
+    path('admin/', admin.site.urls),
+    path('', include('trainee.urls')),
+    path('', include('trainee.api_urls')),  
 ]

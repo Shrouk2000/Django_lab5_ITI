@@ -1,3 +1,4 @@
+
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Trainee
 from .forms import TraineeForm
@@ -10,7 +11,7 @@ def create_trainee(request):
     if request.method == 'POST':
         form = TraineeForm(request.POST)
         if form.is_valid():
-            form.save()  # Save the new trainee
+            form.save()
             return redirect('index')
     else:
         form = TraineeForm()
@@ -27,7 +28,7 @@ def update_trainee(request, id):
     if request.method == 'POST':
         form = TraineeForm(request.POST, instance=trainee)
         if form.is_valid():
-            form.save()  # Update the trainee
+            form.save()
             return redirect('detail', id=id)
     else:
         form = TraineeForm(instance=trainee)
@@ -36,6 +37,6 @@ def update_trainee(request, id):
 def delete_trainee(request, id):
     trainee = get_object_or_404(Trainee, id=id)
     if request.method == 'POST':
-        trainee.delete_trainee()  # Using the model method to delete
+        trainee.delete()
         return redirect('index')
     return render(request, 'trainee/delete_trainee.html', {'trainee': trainee})

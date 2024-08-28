@@ -5,10 +5,55 @@
 {% endblock %}
 
 {% block content %}
-<form method="post">
+<form id="update-trainee-form">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>
 </form>
 <a href="{% url 'index' %}">Back to list</a>
+
+<script>
+document.getElementById('update-trainee-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Get the CSRF token
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    // Collect form data
+    const formData = new FormData(this);
+
+    // Convert FormData to a JSON object
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+
+    // Extract trainee ID from the URL
+    const traineeId = window.location.pathname.split('/').filter(Boolean).pop();
+
+    // Send PUT request to update trainee
+    fetch(`/api/trainees/${traineeId}/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.id) {
+            // Redirect to the detail page on successful update
+            window.location.href = `/trainees/${data.id}/`;
+        } else {
+            // Handle errors
+            alert('Failed to update the trainee.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred.');
+    });
+});
+</script>
 {% endblock %}

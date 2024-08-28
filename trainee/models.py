@@ -1,3 +1,4 @@
+# myapp/models.py
 from django.db import models
 
 class Trainee(models.Model):
@@ -20,13 +21,3 @@ class Trainee(models.Model):
             return cls.objects.get(id=id)
         except cls.DoesNotExist:
             return None
-
-    def update_trainee(self, **kwargs):
-        """Updates the current Trainee instance."""
-        for attr, value in kwargs.items():
-            setattr(self, attr, value)
-        self.save()
-
-    def delete_trainee(self):
-        """Deletes the current Trainee instance."""
-        self.delete()
